@@ -52,6 +52,16 @@ public class Steganography {
         return copy;
     }
 
+    public static boolean canHide(Picture source, Picture secret){
+        return (source.getHeight()==secret.getHeight() && secret.getWidth()== secret.getWidth());
+    }
+
+
+    public static Picture hidePicture(Picture source, Picture secret){
+        Picture merge= new Picture();
+
+    }
+
 
     public static void main(String[] args) {
         Picture beach = new Picture ("beach.jpg");
