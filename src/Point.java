@@ -4,9 +4,17 @@ public class Point {
     private int y;
 
     public Point(int a,int b){
-        a=x;
-        b=y;
+        x=a;
+        y=b;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 
     public int getX() {
