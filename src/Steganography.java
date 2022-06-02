@@ -151,7 +151,7 @@ public class Steganography {
 
     public static ArrayList<Integer> encodeString(String s){
         s = s.toUpperCase();
-        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
         ArrayList<Integer> result=new ArrayList<Integer>();
         for(int i=1; i<=s.length(); i++){
             result.add(alpha.indexOf(s.charAt(i)+1));
@@ -162,11 +162,41 @@ public class Steganography {
 
     public static String decodeString(ArrayList<Integer> codes){
         String result="";
-        String alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
         for(int i=1; i<=codes.size(); i++){
             result+= alpha.charAt(codes.get(i)-1);
         }
         return result;
+    }
+
+    private static int[] getBitPairs(int num){
+        int[] arr= new int[3];
+        arr[2]=num/16;
+        arr[1]=num/4%4;
+        arr[0]=num%4;
+        return arr;
+    }
+
+    public static Picture hideText(Picture source, String s) {
+        Picture copy= new Picture(source);
+        Pixel[][] pixels= copy.getPixels2D();
+        ArrayList<Integer> arrayList= encodeString(s);
+        int[][]arr= new int[encodeString(s).size()][3];
+        int x=0;
+
+
+        for(int i=0; i<encodeString(s).size(); i++){
+                arr[i] = getBitPairs(arrayList.get(i));
+        }
+
+        for (int row=0; row< source.getHeight(); row++){
+            for (int col=0; col<source.getWidth(); col++){
+
+
+                if(x>s.length())return copy;
+            }
+        }
+
     }
 
 
@@ -197,18 +227,18 @@ public class Steganography {
 //            System.out.println ("Pointlist after hiding a picture has a size of "+ pointList.size());
 //            arch.show();
 //            arch2.show();
-        Picture hall = new Picture ("femaleLionAndHall.jpg") ;
-        Picture robot2 =  new Picture ("robot.jpg") ;
-        Picture flower2 = new Picture ("flower1.jpg") ;
-        Picture hall2 = hidePicture (hall, robot2, 50, 300) ;
-        Picture hall3= hidePicture(hall2, flower2, 115, 275);
-        hall3.explore();
-        if(!isSame(hall, hall3)) {
-            Picture hall4 = showDifferentArea(hall, findDifferences(hall, hall3));
-            hall4.show();
-            Picture unhiddenHall3 = revealPicture(hall3);
-            unhiddenHall3.show();
-        }
+//        Picture hall = new Picture ("femaleLionAndHall.jpg") ;
+//        Picture robot2 =  new Picture ("robot.jpg") ;
+//        Picture flower2 = new Picture ("flower1.jpg") ;
+//        Picture hall2 = hidePicture (hall, robot2, 50, 300) ;
+//        Picture hall3= hidePicture(hall2, flower2, 115, 275);
+//        hall3.explore();
+//        if(!isSame(hall, hall3)) {
+//            Picture hall4 = showDifferentArea(hall, findDifferences(hall, hall3));
+//            hall4.show();
+//            Picture unhiddenHall3 = revealPicture(hall3);
+//            unhiddenHall3.show();
+//        }
 
 //        Picture beach = new Picture ("beach.jpg");
 //        beach.explore();
@@ -220,6 +250,12 @@ public class Steganography {
 //        copy2.explore();
 //        Picture copy3= revealPicture(copy2);
 //        copy3.explore();
+
+        int x= 38;
+        int[]arr= getBitPairs(x);
+        for(int i=0; i<3; i++){
+            System.out.println(arr[i]);
+        }
     }
 
 }
