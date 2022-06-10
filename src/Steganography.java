@@ -153,8 +153,8 @@ public class Steganography {
         s = s.toUpperCase();
         String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
         ArrayList<Integer> result=new ArrayList<Integer>();
-        for(int i=1; i<=s.length(); i++){
-            result.add(alpha.indexOf(s.charAt(i)+1));
+        for(int i=0; i<s.length(); i++){
+            result.add(alpha.indexOf(s.charAt(i))+1);
         }
         result.add(0);
         return result;
@@ -163,7 +163,8 @@ public class Steganography {
     public static String decodeString(ArrayList<Integer> codes){
         String result="";
         String alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-        for(int i=1; i<=codes.size(); i++){
+        for(int i=0; i<codes.size(); i++){
+            if(codes.get(i)==0)return result;
             result+= alpha.charAt(codes.get(i)-1);
         }
         return result;
@@ -191,6 +192,10 @@ public class Steganography {
 
         for (int row=0; row< source.getHeight(); row++){
             for (int col=0; col<source.getWidth(); col++){
+                pixels[row][col].setRed(arr[x][0]);
+                pixels[row][col].setGreen(arr[x][1]);
+                pixels[row][col].setBlue(arr[x][2]);
+                x++;
 
 
                 if(x>s.length())return copy;
@@ -200,7 +205,25 @@ public class Steganography {
 
     }
 //
-//    public static Picture showText()
+    public static String revealText(Picture source){
+        Picture copy= new Picture(source);
+        Pixel[][] pixels= copy.getPixels2D();
+        ArrayList<Integer>encoded= new ArrayList<Integer>();
+
+
+
+        for (int row=0; row< pixels.length; row++){
+            for (int col=0; col<pixels[0].length; col++){
+                Pixel p=pixels[row][col];
+                int x=p.getRed()%4+p.getGreen()%4*4+p.getBlue()%4*16;
+                encoded.add(x);
+                System.out.println("ping");
+                if(x==0){return decodeString(encoded);}
+
+            }
+        }
+        return decodeString(encoded);
+    }
 
 
 
@@ -242,9 +265,15 @@ public class Steganography {
 //            Picture unhiddenHall3 = revealPicture(hall3);
 //            unhiddenHall3.show();
 //        }
+        String preamble = "We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence promote the general Welfare and secure the Blessings of Liberty to ourselves and our Posterity do ordain and establish this Constitution for the United States of America";
 
-//        Picture beach = new Picture ("beach.jpg");
-//        beach.explore();
+        Picture beach = new Picture ("beach.jpg");
+        beach.explore();
+
+        Picture hide= hideText(beach, preamble);
+        hide.explore();
+
+        System.out.println(revealText(hide));
 //        Picture copy= testClearLow(beach);
 //        copy.explore();
 //        Picture beach2 = new Picture ("beach.jpg");
@@ -254,11 +283,6 @@ public class Steganography {
 //        Picture copy3= revealPicture(copy2);
 //        copy3.explore();
 
-        int x= 38;
-        int[]arr= getBitPairs(x);
-        for(int i=0; i<3; i++){
-            System.out.println(arr[i]);
-        }
     }
 
 }

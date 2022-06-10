@@ -20,7 +20,7 @@ public class Grayscale {
     }
 
     public static void main(String[] args) {
-        Picture beach= new Picture("beach.jpg");
+        Picture beach= new Picture("koala.jpg");
         Picture greyscale= gs(beach);
 
         beach.explore();
