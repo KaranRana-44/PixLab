@@ -196,8 +196,11 @@ public class Steganography {
                 if(x>s.length())return copy;
             }
         }
+        return copy;
 
     }
+//
+//    public static Picture showText()
 
 
 
