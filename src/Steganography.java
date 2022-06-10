@@ -217,7 +217,6 @@ public class Steganography {
                 Pixel p=pixels[row][col];
                 int x=p.getRed()%4+p.getGreen()%4*4+p.getBlue()%4*16;
                 encoded.add(x);
-                System.out.println("ping");
                 if(x==0){return decodeString(encoded);}
 
             }
@@ -240,7 +239,7 @@ public class Steganography {
 //        hidden2.explore();
 //        Picture unhidden= revealPicture(hidden2);
 //        unhidden.explore();
-
+//
 //            Picture arch = new Picture ("arch.jpg");
 //            Picture koala = new Picture ("koala.jpg");
 //            Picture robot1 = new Picture ("robot.jpg") ;
@@ -264,16 +263,16 @@ public class Steganography {
 //            hall4.show();
 //            Picture unhiddenHall3 = revealPicture(hall3);
 //            unhiddenHall3.show();
-//        }
-        String preamble = "We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence promote the general Welfare and secure the Blessings of Liberty to ourselves and our Posterity do ordain and establish this Constitution for the United States of America";
-
-        Picture beach = new Picture ("beach.jpg");
-        beach.explore();
-
-        Picture hide= hideText(beach, preamble);
-        hide.explore();
-
-        System.out.println(revealText(hide));
+//       }
+//        String preamble = "We the People of the United States in Order to form a more perfect Union establish Justice insure domestic Tranquility provide for the common defence promote the general Welfare and secure the Blessings of Liberty to ourselves and our Posterity do ordain and establish this Constitution for the United States of America";
+//
+//        Picture beach = new Picture ("beach.jpg");
+//        beach.explore();
+//
+//        Picture hide= hideText(beach, preamble);
+//        hide.explore();
+//
+//        System.out.println(revealText(hide));
 //        Picture copy= testClearLow(beach);
 //        copy.explore();
 //        Picture beach2 = new Picture ("beach.jpg");
