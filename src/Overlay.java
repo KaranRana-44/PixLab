@@ -1,5 +1,7 @@
 import java.awt.Color;
 
+import static java.awt.Color.BLUE;
+
 public class Overlay {
 
     private final Picture m_overlayPic, m_backgroundPic;
@@ -48,13 +50,18 @@ public class Overlay {
             }
         }
 
-        for (int row = m_posX; row < m_backgroundPixels.length; row++) {
-            for (int col = m_posY; col < m_backgroundPixels[0].length; col++) {
-            if (!(row > top.length - 1 || col > top[0].length - 1)) {
-                if(top[row][col] != null) {
-                    m_backgroundPixels[row][col].setColor(top[row][col].getColor());
+        for (int row = m_posY, topRow = 0; row < m_backgroundPixels.length; row++, topRow++) {
+            for (int col = m_posX, topCol = 0; col < m_backgroundPixels[0].length; col++, topCol++) {
+                if (!(row > top[0].length- 1 || col > top.length - 1)) {
+                    System.out.println("RETAIL ROW");
+//                    if(top[topRow][topCol] != null) {
+//                        m_backgroundPixels[row][col].setColor(top[row-m_posX][col-m_posY].getColor());
+
+//                    }
+                    System.out.println("row: " + row + " " + "col: " + col);
+                    System.out.println("topRow: " + topRow + " " + "topCol: " + topCol);
+                    m_backgroundPixels[row][col].setColor(BLUE);
                 }
-            }
         }
     }
 
