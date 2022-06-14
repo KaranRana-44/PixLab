@@ -20,6 +20,7 @@ public class Overlay {
              background,
              (background.getWidth() / 2) - (input.getWidth() / 2),
              (background.getHeight() / 2) - (input.getHeight() / 2));
+
     }
 
     private boolean doesFit(Picture input, Picture background) {
@@ -57,16 +58,24 @@ public class Overlay {
         }
     }
 
-        m_backgroundPic.explore();
         return m_backgroundPic;
     }
 
-    public static void main(String[] args) {
-        Picture robot= new Picture("robot.jpg");
-        Picture flower1= new Picture("flower1.jpg");
-        Overlay overlay= new Overlay(robot, flower1);
-        Picture buh= overlay.putPicture();
-        buh.explore();
+    public int getPosX() {
+        return m_posX;
+    }
 
+    public int getPosY() {
+        return m_posY;
+    }
+
+    public static void main(String[] args) {
+        Picture caterpillar = new Picture("caterpillar.jpg");
+        Picture koala = new Picture("koala.jpg");
+//        Overlay overlay = new Overlay(caterpillar, koala);
+        Overlay overlay = new Overlay(caterpillar, koala, 50,50);
+        overlay.putPicture().explore();
+
+        System.out.println(overlay.getPosX() + " " + overlay.getPosY());
     }
 }
